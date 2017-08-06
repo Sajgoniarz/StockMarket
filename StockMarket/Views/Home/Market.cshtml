@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Market";
+}
+
+@section scripts {
+    <script src="~/Content/scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Content/scripts/stockMarket.js"></script>
+}
+
+<h2>Market</h2>
+<div class="row">
+    <div class="col-lg-12" id="connectionStatus">
+        <div class="alert alert-info text-center"><div class="loading">Connecting</div></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Stock Market <span class="pull-right">Last Update: <strong id="publicationDate">No Data</strong></span></div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marketStock">
+                        <tr><td colspan="3" class="text-center"><div class="loading">Retriving Data</div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">My Wallet</div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Unit Price</th>
+                            <th>Amount</th>
+                            <th>Value</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userStock">
+                        <tr><td colspan="3" class="text-center"><div class="loading">Retriving Data</div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                Available Money : <span id="userFounds">0</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Transaction</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="amount"></label>
+                    <input type="number" class="form-control text-right" id="amount">
+                    X <span id="price"></span> = <span id="sum"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="transactionConfirmButton">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
