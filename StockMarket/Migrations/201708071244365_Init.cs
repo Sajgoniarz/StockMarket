@@ -3,7 +3,7 @@ namespace StockMarket.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -38,24 +38,25 @@ namespace StockMarket.Migrations
                         UserStockId = c.Int(nullable: false, identity: true),
                         StockId = c.Int(nullable: false),
                         Amount = c.Int(),
-                        Wallet_WalletId = c.String(maxLength: 128),
+                        Wallet_UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.UserStockId)
                 .ForeignKey("dbo.Stocks", t => t.StockId, cascadeDelete: true)
-                .ForeignKey("dbo.Wallets", t => t.Wallet_WalletId)
+                .ForeignKey("dbo.Wallets", t => t.Wallet_UserId)
                 .Index(t => t.StockId)
-                .Index(t => t.Wallet_WalletId);
+                .Index(t => t.Wallet_UserId);
             
             CreateTable(
                 "dbo.Wallets",
                 c => new
                     {
-                        WalletId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        WalletId = c.Int(nullable: false),
                         Founds = c.Decimal(nullable: false, precision: 20, scale: 4),
                     })
-                .PrimaryKey(t => t.WalletId)
-                .ForeignKey("dbo.AspNetUsers", t => t.WalletId)
-                .Index(t => t.WalletId);
+                .PrimaryKey(t => t.UserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -131,8 +132,8 @@ namespace StockMarket.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Prices", "StockId", "dbo.Stocks");
-            DropForeignKey("dbo.UserStocks", "Wallet_WalletId", "dbo.Wallets");
-            DropForeignKey("dbo.Wallets", "WalletId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserStocks", "Wallet_UserId", "dbo.Wallets");
+            DropForeignKey("dbo.Wallets", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
@@ -143,8 +144,8 @@ namespace StockMarket.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Wallets", new[] { "WalletId" });
-            DropIndex("dbo.UserStocks", new[] { "Wallet_WalletId" });
+            DropIndex("dbo.Wallets", new[] { "UserId" });
+            DropIndex("dbo.UserStocks", new[] { "Wallet_UserId" });
             DropIndex("dbo.UserStocks", new[] { "StockId" });
             DropIndex("dbo.Prices", new[] { "StockId" });
             DropTable("dbo.AspNetRoles");

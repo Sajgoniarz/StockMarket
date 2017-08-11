@@ -20,8 +20,7 @@ namespace StockMarket.Models.Concrete.Repositories.EntityFramework
 
         public Wallet GetMarketWallet()
         {
-            string stockMarketUserName = ConfigurationManager.AppSettings["StockMarketUsername"];
-            return context.Wallets.Where(w => w.ApplicationUser.UserName == stockMarketUserName).FirstOrDefault();
+            return context.Wallets.FirstOrDefault(w => w.WalletId == 1);
         }
 
         public void RemovePrices(IEnumerable<Price> prices)

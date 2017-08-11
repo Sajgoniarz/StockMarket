@@ -30,21 +30,23 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Wallet.Founds, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Founds, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Wallet.Founds, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Founds, new { @class = "form-control" })
         </div>
     </div>
     <hr>
-    for (int i = 0; i < Model.Wallet.OwnedStocks.Count; i++)
+    for (int i = 0; i < Model.UserStocks.Count; i++)
     {
         <div class="form-group">
-            @Html.Label(Model.Wallet.OwnedStocks[i].Stock.Code, new { @class = "col-md-2 control-label" })
+            @Html.Label(Model.UserStocks[i].Code, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                @Html.TextBoxFor(s => Model.Wallet.OwnedStocks[i].Amount, new { @class = "form-control" })
+                @Html.HiddenFor(s => s.UserStocks[i].StockId)
+                @Html.TextBoxFor(s => s.UserStocks[i].Amount, new { @class = "form-control" })
+                @Html.HiddenFor(s => s.UserStocks[i].Code)
             </div>
         </div>
-        @Html.HiddenFor(s => Model.Wallet.OwnedStocks[i].StockId)
+        
     }
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

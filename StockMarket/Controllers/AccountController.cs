@@ -8,6 +8,7 @@ using StockMarket.Models.Entities;
 using StockMarket.Models.Abstract;
 using StockMarket.Models.Concrete.Repositories.EntityFramework;
 using StockMarket.ViewModels;
+using System.Collections.Generic;
 
 namespace StockMarket.Controllers
 {
@@ -99,16 +100,17 @@ namespace StockMarket.Controllers
         public ActionResult Register()
         {
             Wallet stockMarketWallet = walletRepository.GetMarketWallet();
+            RegisterViewModel vm = new RegisterViewModel();
+            vm.UserStocks = new List<UserStockViewModel>();
 
             foreach (UserStock stock in stockMarketWallet.OwnedStocks)
             {
-                stock.Amount = null;
+                vm.UserStocks.Add(new UserStockViewModel {
+                    StockId = stock.StockId,
+                    Code = stock.Stock.Code
+                });
             }
 
-            RegisterViewModel vm = new RegisterViewModel();
-
-            stockMarketWallet.Founds = 0;
-            vm.Wallet = stockMarketWallet;
             return View(vm);
         }
 
@@ -121,7 +123,18 @@ namespace StockMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Wallet = model.Wallet };
+                var wallet = new Wallet();
+                wallet.Founds = model.Founds;
+
+                foreach(var stock in model.UserStocks)
+                {
+                    wallet.OwnedStocks.Add(new UserStock {
+                        Amount = stock.Amount,
+                        StockId = stock.StockId
+                    });
+                }
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Wallet = wallet };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

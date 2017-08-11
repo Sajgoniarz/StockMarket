@@ -26,7 +26,7 @@ namespace StockMarket.ViewModels
             if (wallet.OwnedStocks.Count == 0) return temp;
 
             temp.Founds = wallet.Founds;
-            temp.PublicationDate = wallet.OwnedStocks[0].Stock.PublicationDate;
+            temp.PublicationDate = wallet.OwnedStocks[0].Stock.PublicationDate.ToUniversalTime();
 
             foreach (UserStock us in wallet.OwnedStocks)
             {

@@ -12,6 +12,7 @@ namespace StockMarket.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ApplicationContext context)
@@ -148,6 +149,7 @@ namespace StockMarket.Migrations
 
             var wallet = new Wallet
             {
+                WalletId = 1,
                 Founds = 1000000000M,
                 OwnedStocks = userStockList
             };

@@ -8,9 +8,10 @@ namespace StockMarket.Models.Entities
 {
     public class Wallet
     {
-        [Key, ForeignKey("ApplicationUser")]
-        public string WalletId { get; set; }
+        public int WalletId { get; set; }
 
+        public string UserId { get; set; }
+        
         public decimal Founds { get; set; }
 
         public virtual IList<UserStock> OwnedStocks { get; set; }

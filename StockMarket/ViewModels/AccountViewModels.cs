@@ -1,4 +1,5 @@
 ﻿using StockMarket.Models.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace StockMarket.ViewModels
@@ -36,6 +37,14 @@ namespace StockMarket.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public Wallet Wallet { get; set; }
+        public decimal Founds { get; set; }
+        public List<UserStockViewModel> UserStocks { get; set; }
+    }
+
+    public class UserStockViewModel
+    {
+        public int StockId { get; set; }
+        public int? Amount { get; set; }
+        public string Code { get; set; }
     }
 }

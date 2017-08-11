@@ -214,9 +214,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\StockMarketHub.cs" />
-    <Compile Include="Migrations\201708052237486_Initial.cs" />
-    <Compile Include="Migrations\201708052237486_Initial.Designer.cs">
-      <DependentUpon>201708052237486_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201708071244365_Init.cs" />
+    <Compile Include="Migrations\201708071244365_Init.Designer.cs">
+      <DependentUpon>201708071244365_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Abstract\IPriceRepository.cs" />
@@ -319,12 +319,12 @@
     <Content Include="Content\scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708052237486_Initial.resx">
-      <DependentUpon>201708052237486_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <EmbeddedResource Include="Migrations\201708071244365_Init.resx">
+      <DependentUpon>201708071244365_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
